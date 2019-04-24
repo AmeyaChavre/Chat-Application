@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 // Inlcude the RouterModule
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [ChatBoxComponent],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     RouterModule.forChild([
       // Include routing for chat component
       { path: 'chat', component: ChatBoxComponent }
