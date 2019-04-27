@@ -5,7 +5,6 @@ import { AppService } from './../../app.service';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ToastrService } from 'ngx-toastr';
-
 import { FirstCharComponent } from '../../shared/first-char/first-char.component';
 import { ChatMessage } from './chat';
 import { CheckUser } from './../../CheckUser';
@@ -18,7 +17,7 @@ import { CheckUser } from './../../CheckUser';
   providers: [SocketService]
 })
 
-export class ChatBoxComponent implements OnInit,CheckUser{
+export class ChatBoxComponent implements OnInit{
 
   @ViewChild('scrollMe', { read: ElementRef }) 
   
@@ -53,7 +52,8 @@ export class ChatBoxComponent implements OnInit,CheckUser{
 
    
     
-   
+    
+
 
   }
 
@@ -75,7 +75,7 @@ export class ChatBoxComponent implements OnInit,CheckUser{
       this.userSelectedToChat(this.receiverId,this.receiverName)
     }
 
-    this.checkStatus();
+   // this.checkStatus();
 
     this.verifyUserConfirmation();
     this.getOnlineUserList()
@@ -87,21 +87,21 @@ export class ChatBoxComponent implements OnInit,CheckUser{
   }
 
 
-  public checkStatus: any = () => {
+  // public checkStatus: any = () => {
 
-    if (Cookie.get('authtoken') === undefined || Cookie.get('authtoken') === '' || Cookie.get('authtoken') === null) {
+  //   if (Cookie.get('authtoken') === undefined || Cookie.get('authtoken') === '' || Cookie.get('authtoken') === null) {
 
-      this.router.navigate(['/']);
+  //     this.router.navigate(['/']);
 
-      return false;
+  //     return false;
 
-    } else {
+  //   } else {
 
-      return true;
+  //     return true;
 
-    }
+  //   }
 
-  } // end checkStatus
+  // } // end checkStatus
 
 
 
