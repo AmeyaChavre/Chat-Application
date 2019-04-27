@@ -10,7 +10,8 @@ export class UserDetailsComponent implements OnInit {
   @Input() userLastName: string;
   @Input() userStatus: string;
   @Input() messageRead: string;
-
+  @Input() userColor: any;
+  @Input() userBg: any;
   
   public firstChar: string;
 
