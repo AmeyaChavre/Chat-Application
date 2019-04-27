@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { ToastrService } from 'ngx-toastr';
 
+import { FirstCharComponent } from '../../shared/first-char/first-char.component';
+import { ChatMessage } from './chat';
+import { CheckUser } from './../../CheckUser';
+
 
 @Component({
   selector: 'app-chat-box',
@@ -14,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   providers: [SocketService]
 })
 
-export class ChatBoxComponent implements OnInit{
+export class ChatBoxComponent implements OnInit,CheckUser{
 
   @ViewChild('scrollMe', { read: ElementRef }) 
   
@@ -33,7 +37,7 @@ export class ChatBoxComponent implements OnInit{
   public receiverName: any;
   public previousChatList: any = [];
   public messageText: any; 
-  public messageList: any = []; // stores the current message list display in chat box
+  public messageList = []; // stores the current message list display in chat box
   public pageValue: number = 0;
   public loadingPreviousChat: boolean = false;
 
@@ -44,7 +48,12 @@ export class ChatBoxComponent implements OnInit{
     public SocketService: SocketService,
     public router: Router,
     private toastr: ToastrService
+   
   ) {
+
+   
+    
+   
 
   }
 
@@ -142,6 +151,8 @@ export class ChatBoxComponent implements OnInit{
       if (apiResponse.status == 200) {
 
         this.messageList = apiResponse.data.concat(previousData);
+        console.log("messagelist")
+        console.log(this.messageList)
 
       } else {
 
@@ -233,7 +244,7 @@ export class ChatBoxComponent implements OnInit{
 
     if(this.messageText){
 
-      let chatMsgObject = {
+      let chatMsgObject:ChatMessage = {
         senderName: this.userInfo.firstName + " " + this.userInfo.lastName,
         senderId: this.userInfo.userId,
         receiverName: Cookie.get('receiverName'),
@@ -309,6 +320,14 @@ export class ChatBoxComponent implements OnInit{
       });
 
   } // end logout
+
+  // handle the output from a child component 
+
+  public showUserName =(name:string)=>{
+
+    this.toastr.success("You are chatting with "+name)
+
+  }
 
 
 
